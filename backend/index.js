@@ -1,7 +1,8 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-const cors = require('cors');
+import express from 'express';
+import mongoose from 'mongoose';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import router from './routes/index.js';
 
 const app = express();
 
@@ -23,14 +24,7 @@ connection.once('open', () => {
     console.log('MongoDB database connection established successfully');
 });
 
-const userRoutes = require('./controller/user');
-
-app.use('/api/users', userRoutes);
-
-
-app.get('/', (req, res) => {
-    res.send('Hello World')
-});
+app.use('/api', router);
 
 app.listen(3000, () => {
     console.log("server is listening on port 3000");

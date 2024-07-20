@@ -1,4 +1,5 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
+import bcrypt from 'bcrypt';
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
@@ -7,5 +8,21 @@ const userSchema = new Schema({
     role: {type: String, enum: ['job-seeker', 'employer'], required: true},
 });
 
-module.exports = mongoose.model('User', userSchema);
+userSchema.pre('validate', function(next) {
+    let self = this;
+    if (self.isNew || self.isModified('password')) {
+        bcrypt.hash(self.password, 10)
+        .then((password) => {
+            this.password = password;
+            return next();
+        })
+        .catch (err => {
+            return next(err);
+        })
+    }
+})
+
+const User = mongoose.model('User', userSchema);
+
+export default User;
 
