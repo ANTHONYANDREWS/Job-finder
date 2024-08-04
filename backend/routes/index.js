@@ -1,12 +1,11 @@
-import {Router} from 'express';
-import userRoutes from './user.js';
-import restifyRoutes from './restify.js'
+// import {Router} from 'express';
+// import userRoutes from './user.js';
+// import restifyRoutes from './restify.js'
 
-const router = Router();
+// const router = Router();
 
 
-router.use('/users', userRoutes);
+// router.use('/users', userRoutes);
 
-router.use('/',restifyRoutes);
 
-export default router;
+// export default router;
