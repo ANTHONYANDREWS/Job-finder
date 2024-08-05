@@ -7,5 +7,6 @@
 
 // router.use('/users', userRoutes);
 
+// router.use('/',restifyRoutes);
 
 // export default router;
